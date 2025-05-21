@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Web Development - Martin Gou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-transition"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">Martin Gou</a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="index.html" class="active">Blog</a>
+                <a href="../projects/index.html">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="post-header">
+        <div class="container">
+            <h1>Getting Started with Web Development</h1>
+            <div class="post-meta">
+                <span><i class="far fa-calendar"></i> May 21, 2025</span>
+                <span><i class="far fa-folder"></i> Technology</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <p>Web development is an exciting field that combines creativity with technical skills. Whether you're looking to build a personal website, start a career in tech, or just understand how the web works, learning web development is a valuable skill in today's digital world.</p>
+        
+        <p>In this post, I'll introduce you to the fundamental technologies and concepts you need to know to get started with web development.</p>
+        
+        <h2>The Three Core Technologies</h2>
+        
+        <p>Web development is built on three core technologies:</p>
+        
+        <h3>1. HTML (HyperText Markup Language)</h3>
+        
+        <p>HTML is the backbone of any website. It provides the structure and content of web pages using a system of tags and attributes. Think of HTML as the skeleton of a website.</p>
+        
+        <p>Here's a simple example of HTML code:</p>
+        
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        
+        <h3>2. CSS (Cascading Style Sheets)</h3>
+        
+        <p>CSS is used to style and layout web pages. It controls how HTML elements look and are positioned on the page. If HTML is the skeleton, CSS is the skin and clothes.</p>
+        
+        <p>Here's a simple example of CSS:</p>
+        
+        <pre><code>body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+    color: #666;
+}</code></pre>
+        
+        <h3>3. JavaScript</h3>
+        
+        <p>JavaScript is a programming language that makes web pages interactive. It allows you to create dynamic content, control multimedia, animate images, and much more. If HTML is the skeleton and CSS is the appearance, JavaScript is the muscles that make everything move.</p>
+        
+        <p>Here's a simple example of JavaScript:</p>
+        
+        <pre><code>// When the button is clicked, change the text
+document.getElementById('myButton').addEventListener('click', function() {
+    document.getElementById('myText').innerHTML = 'Button was clicked!';
+});</code></pre>
+        
+        <h2>Tools You'll Need</h2>
+        
+        <p>To start web development, you'll need a few basic tools:</p>
+        
+        <ul>
+            <li><strong>Text Editor or IDE:</strong> Programs like Visual Studio Code, Sublime Text, or Atom are popular choices for writing code.</li>
+            <li><strong>Web Browser:</strong> Chrome, Firefox, or Edge all come with developer tools that help you test and debug your code.</li>
+            <li><strong>Version Control:</strong> Git is essential for tracking changes to your code and collaborating with others.</li>
+        </ul>
+        
+        <h2>Learning Path for Beginners</h2>
+        
+        <p>If you're just starting out, here's a suggested learning path:</p>
+        
+        <ol>
+            <li>Learn HTML basics - structure, tags, attributes</li>
+            <li>Learn CSS basics - selectors, properties, values</li>
+            <li>Learn JavaScript fundamentals - variables, functions, events</li>
+            <li>Build simple projects that combine all three</li>
+            <li>Learn responsive design to make your sites work on all devices</li>
+            <li>Explore frameworks like Bootstrap (CSS) or React (JavaScript)</li>
+        </ol>
+        
+        <h2>Resources for Learning</h2>
+        
+        <p>There are many excellent resources available for learning web development:</p>
+        
+        <ul>
+            <li><strong>MDN Web Docs:</strong> Comprehensive documentation for web technologies</li>
+            <li><strong>freeCodeCamp:</strong> Free interactive coding lessons</li>
+            <li><strong>Codecademy:</strong> Interactive coding exercises</li>
+            <li><strong>YouTube tutorials:</strong> Visual learning with step-by-step guidance</li>
+            <li><strong>Web development books:</strong> In-depth knowledge and reference</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        
+        <p>Web development is a vast field with endless possibilities. The key is to start simple, build projects, and keep learning. Don't be discouraged by the amount there is to learn - everyone starts somewhere, and with consistent practice, you'll make progress.</p>
+        
+        <p>In future posts, I'll dive deeper into specific web development topics and share more advanced techniques. Stay tuned!</p>
+        
+        <blockquote>
+            "The only way to learn a new programming language is by writing programs in it." - Dennis Ritchie
+        </blockquote>
+    </article>
+
+    <!-- Author Section -->
+    <section class="author">
+        <div class="author-content">
+            <div class="author-image">
+                <img src="../images/profile.jpg" alt="Martin Gou">
+            </div>
+            <div class="author-info">
+                <h3>Martin Gou</h3>
+                <p>Web developer and technology enthusiast. I write about web development, design, and other tech-related topics.</p>
+                <div class="author-social">
+                    <a href="https://github.com/martin-gou" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/martin-gou" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h2>Related Posts</h2>
+            <div class="related-grid">
+                <div class="post-card">
+                    <div class="post-image">
+                        <img src="../images/blog2.jpg" alt="Blog Post 2">
+                    </div>
+                    <div class="post-info">
+                        <div class="post-meta">
+                            <span class="date">May 15, 2025</span>
+                            <span class="category">Design</span>
+                        </div>
+                        <h3>The Importance of User Experience</h3>
+                        <p>How good UX design can make or break your digital product.</p>
+                        <a href="post2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="post-image">
+                        <img src="../images/blog3.jpg" alt="Blog Post 3">
+                    </div>
+                    <div class="post-info">
+                        <div class="post-meta">
+                            <span class="date">May 10, 2025</span>
+                            <span class="category">Programming</span>
+                        </div>
+                        <h3>Mastering JavaScript: Tips and Tricks</h3>
+                        <p>Advanced JavaScript techniques to level up your coding skills.</p>
+                        <a href="post3.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Martin Gou</h3>
+                    <p>Personal Website</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-nav">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="../index.html#about">About</a></li>
+                            <li><a href="index.html">Blog</a></li>
+                            <li><a href="../projects/index.html">Projects</a></li>
+                            <li><a href="../index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="https://github.com/martin-gou" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com/in/martin-gou" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="mailto:your-email@example.com"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Martin Gou. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
