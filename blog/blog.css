@@ -1,0 +1,362 @@
+/* Blog specific styles */
+
+/* Blog Header */
+.blog-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/blog-header-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.blog-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+.blog-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.blog-header p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Blog Posts Section */
+.blog-posts {
+    padding: 80px 0;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+.blog-card {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.blog-image {
+    height: 240px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-medium);
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 30px;
+}
+
+.blog-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: var(--gray-500);
+}
+
+.blog-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.blog-content p {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+/* Newsletter Section */
+.newsletter {
+    background-color: var(--gray-100);
+    padding: 80px 0;
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.newsletter-content p {
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-family);
+    font-size: 1rem;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Blog Post Page */
+.post-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 150px 0 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.post-header .container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.post-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.post-content p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.post-content h2 {
+    font-size: 1.8rem;
+    margin: 40px 0 20px;
+    color: var(--dark-color);
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+    margin: 30px 0 15px;
+    color: var(--dark-color);
+}
+
+.post-content ul, 
+.post-content ol {
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+.post-content li {
+    margin-bottom: 10px;
+}
+
+.post-content img {
+    max-width: 100%;
+    border-radius: var(--border-radius-md);
+    margin: 30px 0;
+}
+
+.post-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding: 20px;
+    background-color: var(--gray-100);
+    margin: 30px 0;
+    font-style: italic;
+}
+
+.post-content code {
+    background-color: var(--gray-200);
+    padding: 2px 5px;
+    border-radius: var(--border-radius-sm);
+    font-family: monospace;
+}
+
+.post-content pre {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 20px;
+    border-radius: var(--border-radius-md);
+    overflow-x: auto;
+    margin: 30px 0;
+}
+
+.post-content pre code {
+    background-color: transparent;
+    color: white;
+    padding: 0;
+}
+
+/* Author Section */
+.author {
+    background-color: var(--gray-100);
+    padding: 60px 0;
+}
+
+.author-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.author-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.author-info p {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.author-social {
+    display: flex;
+    gap: 15px;
+}
+
+.author-social a {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    transition: color var(--transition-medium);
+}
+
+.author-social a:hover {
+    color: var(--accent-color);
+}
+
+/* Related Posts */
+.related-posts {
+    padding: 80px 0;
+}
+
+.related-posts h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--dark-color);
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .blog-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .post-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .author-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .author-social {
+        justify-content: center;
+    }
+    
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+}
