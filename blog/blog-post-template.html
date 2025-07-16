@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Martin Gou</title>
+    <title id="page-title">Loading... - Martin Gou</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="blog.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,31 +33,49 @@
         </div>
     </nav>
 
-    <!-- Blog Header -->
-    <header class="blog-header">
-        <div class="container">
-            <h1>My Blog</h1>
-            <p>Thoughts, ideas, and insights on technology and more</p>
+    <!-- Post Header -->
+    <header class="post-header" id="post-header">
+        <div class="header-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);"></div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <h1 id="post-title" style="color: #fff;">Loading...</h1>
+            <div class="post-meta" id="post-meta" style="color: #fff;">
+                <span><i class="far fa-calendar"></i> <span id="post-date">Loading...</span></span>
+                <span><i class="far fa-folder"></i> <span id="post-category">Loading...</span></span>
+            </div>
         </div>
     </header>
 
-    <!-- Blog Posts -->
-    <section class="blog-posts">
-        <div class="container">
-            <div class="blog-grid" id="blog-posts-container">
-                <!-- Blog posts will be dynamically loaded here -->
-            </div>    </section>
+    <!-- Post Content -->
+    <article class="post-content" id="post-content">
+        <!-- This is where your actual blog post content goes -->
+        <!-- Each blog post file should have its unique content here -->
+        <p>Loading content...</p>
+    </article>
 
-    <!-- Newsletter -->
-    <section class="newsletter">
+    <!-- Author Section -->
+    <section class="author">
+        <div class="author-content">
+            <div class="author-image">
+                <img src="../images/profile_picture.jpeg" alt="Martin Gou">
+            </div>
+            <div class="author-info">
+                <h3>Martin Gou</h3>
+                <p>Web developer and technology enthusiast. I write about web development, design, and other tech-related topics.</p>
+                <div class="author-social">
+                    <a href="https://github.com/martin-gou" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/martin-gou" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
         <div class="container">
-            <div class="newsletter-content">
-                <h2>Subscribe to My Newsletter</h2>
-                <p>Get the latest posts and updates delivered straight to your inbox.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit" class="btn primary">Subscribe</button>
-                </form>
+            <h2>Related Posts</h2>
+            <div class="related-grid" id="related-posts-container">
+                <!-- Related posts will be dynamically loaded here -->
             </div>
         </div>
     </section>
@@ -101,10 +119,14 @@
     <script src="../js/blog-data.js"></script>
     <script src="../js/main.js"></script>
     <script>
-        // Load blog posts when page loads
+        // Load blog post data dynamically
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof BlogUtils !== 'undefined') {
-                BlogUtils.renderBlogIndexPosts('blog-posts-container');
+                // Load current post data (title, image, date, category)
+                BlogUtils.loadCurrentPostPage();
+                
+                // Load related posts
+                BlogUtils.loadRelatedPosts();
             }
         });
     </script>

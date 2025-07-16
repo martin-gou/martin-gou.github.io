@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize contact form
     initContactForm();
+    
+    // Load blog posts dynamically
+    loadBlogPosts();
+    
+    // Load projects dynamically
+    loadProjects();
 });
 
 // Initialize animations
@@ -155,6 +161,22 @@ function initContactForm() {
             // Reset form
             contactForm.reset();
         });
+    }
+}
+
+// Load blog posts from centralized data
+function loadBlogPosts() {
+    // Load featured posts on main page
+    if (typeof BlogUtils !== 'undefined') {
+        BlogUtils.renderMainPagePosts('featured-posts-container');
+    }
+}
+
+// Load projects from centralized data
+function loadProjects() {
+    // Load featured projects on main page
+    if (typeof ProjectUtils !== 'undefined') {
+        ProjectUtils.renderMainPageProjects('featured-projects-container');
     }
 }
 
