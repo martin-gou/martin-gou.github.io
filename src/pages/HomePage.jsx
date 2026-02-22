@@ -4,6 +4,29 @@ import { getFeaturedPosts } from '../data/blog.js';
 import { education, personal } from '../data/content.js';
 import { getFeaturedProjects } from '../data/projects.js';
 
+const focusTags = [
+  {
+    label: 'Multi LLM Agent',
+    tone: 'neon',
+    hintTags: ['OpenCode', 'LangGraph', 'OpenAI Agent SDK', 'Orchestration']
+  },
+  {
+    label: 'DevOps',
+    tone: 'blue',
+    hintTags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Prometheus', 'Grafana']
+  },
+  {
+    label: 'Deep Learning',
+    tone: 'violet',
+    hintTags: ['PyTorch', 'Transformers', 'CLIP']
+  },
+  {
+    label: 'Full-Stack',
+    tone: 'amber',
+    hintTags: ['React', 'Django', 'PostgreSQL']
+  }
+];
+
 function HomePage() {
   const featuredWriting = getFeaturedPosts().slice(0, 2);
   const featuredProjects = getFeaturedProjects().slice(0, 2);
@@ -94,7 +117,17 @@ function HomePage() {
               <ul className="terminal-list">
                 <li>
                   <span className="terminal-key">$ focus</span>
-                  <span>Multi LLM Agent, DevOps, Full-Stack, Deep Learning</span>
+                  <span className="focus-chip-list">
+                    {focusTags.map((tag, index) => (
+                      <TerminalFocusChip
+                        key={tag.label}
+                        label={tag.label}
+                        tone={tag.tone}
+                        hintTags={tag.hintTags}
+                        delay={index}
+                      />
+                    ))}
+                  </span>
                 </li>
                 <li>
                   <span className="terminal-key">$ style</span>
@@ -242,6 +275,38 @@ function HomePage() {
         </div>
       </section>
     </main>
+  );
+}
+
+function TerminalFocusChip({ label, tone, hintTags, delay }) {
+  return (
+    <span
+      className={`focus-chip-item tone-${tone}`}
+      style={{ '--chip-delay': `${delay * 45}ms` }}
+      data-reveal=""
+    >
+      <span className="focus-chip-bracket" aria-hidden="true">
+        [
+      </span>
+      <span className="focus-chip-label">{label}</span>
+      <span className="focus-chip-bracket" aria-hidden="true">
+        ]
+      </span>
+      <span className="focus-chip-tooltip" role="note">
+        <span className="focus-chip-tooltip-label">tags</span>
+        <span className="focus-chip-tooltip-list">
+          {hintTags.map((tag, index) => (
+            <span
+              key={`${label}-${tag}`}
+              className="focus-chip-tooltip-tag"
+              style={{ '--tooltip-tag-order': index }}
+            >
+              {tag}
+            </span>
+          ))}
+        </span>
+      </span>
+    </span>
   );
 }
 

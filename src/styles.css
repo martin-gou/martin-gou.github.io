@@ -137,6 +137,7 @@ a {
   align-items: center;
   gap: 0.7rem;
   min-width: 0;
+  position: relative;
 }
 
 .brand-mark {
@@ -1927,8 +1928,7 @@ body {
   padding-top: 1.6rem;
 }
 
-.nav-row::before {
-  content: 'tmux: session main';
+.tmux-pathline {
   position: absolute;
   top: 0;
   left: 0;
@@ -1940,6 +1940,9 @@ body {
   font-size: 0.7rem;
   line-height: 1;
   background: rgba(255, 255, 255, 0.01);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brand-mark {
@@ -1948,8 +1951,168 @@ body {
   border-radius: 4px;
 }
 
-.brand-text {
+.brand-token {
+  width: auto;
+  min-width: 3.1rem;
+  height: 2rem;
+  padding: 0 0.45rem 0 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
   font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #9ff0c3;
+  background: rgba(110, 231, 168, 0.06);
+  border: 1px solid rgba(110, 231, 168, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-token::before {
+  content: '';
+  position: absolute;
+  left: 0.45rem;
+  top: 50%;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: #7ef0b8;
+  box-shadow: 0 0 6px rgba(126, 240, 184, 0.45);
+}
+
+.brand-token-default,
+.brand-token-hover {
+  display: inline-block;
+  white-space: nowrap;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.brand-token-default {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-token-hover {
+  position: absolute;
+  left: 1.05rem;
+  top: 50%;
+  transform: translateY(calc(-50% + 2px));
+  opacity: 0;
+}
+
+.brand-text {
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.05;
+  color: #e2ece6;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 10px rgba(139, 225, 180, 0.04);
+}
+
+.brand-copy {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brand-subtitle {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.18rem);
+  padding: 0.16rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 225, 180, 0.12);
+  background: rgba(10, 14, 17, 0.96);
+  color: #84cfa8;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-2px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+  z-index: 5;
+}
+
+.brand:hover .brand-token {
+  border-color: rgba(139, 225, 180, 0.28);
+  background: rgba(110, 231, 168, 0.1);
+  color: #b7f8d5;
+}
+
+.brand:hover .brand-token-default,
+.brand:focus-visible .brand-token-default {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+
+.brand:hover .brand-token-hover,
+.brand:focus-visible .brand-token-hover {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.brand:hover .brand-text {
+  color: #f0f7f3;
+}
+
+.brand:hover .brand-subtitle,
+.brand:focus-visible .brand-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: rgba(139, 225, 180, 0.18);
+}
+
+.brand:focus-visible {
+  outline: 1px solid rgba(139, 225, 180, 0.32);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+@media (max-width: 900px) {
+  .brand {
+    gap: 0.45rem;
+  }
+
+  .brand-token {
+    min-width: 2.8rem;
+    height: 1.8rem;
+    padding: 0 0.35rem 0 0.95rem;
+    font-size: 0.86rem;
+  }
+
+  .brand-token::before {
+    left: 0.4rem;
+    width: 0.28rem;
+    height: 0.28rem;
+  }
+
+  .brand-token-hover {
+    left: 0.95rem;
+  }
+
+  .brand-text {
+    font-size: 0.95rem;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-text {
+    font-size: 0.87rem;
+    max-width: 12.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .nav-links a {
@@ -2139,11 +2302,558 @@ body {
   background: rgba(255, 255, 255, 0.01);
   color: #a9bbb2;
   font-size: 0.83rem;
+  position: relative;
+  overflow: visible;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.terminal-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(139, 225, 180, 0.08);
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.terminal-list li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 28%;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 225, 180, 0),
+    rgba(139, 225, 180, 0.08),
+    rgba(139, 225, 180, 0)
+  );
+  opacity: 0;
+  pointer-events: none;
 }
 
 .terminal-key {
   color: #8be1b4;
   white-space: nowrap;
+  transition: color 180ms ease, letter-spacing 180ms ease, transform 180ms ease;
+}
+
+.terminal-list li span:last-child {
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.focus-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.focus-chip-item {
+  --chip-accent-rgb: 139, 225, 180;
+  --chip-accent: #8be1b4;
+  --chip-hover-fg: #ecfaf3;
+  --chip-tooltip-fg: #d7efe3;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.14rem;
+  padding: 0.4rem 0.72rem;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 225, 180, 0.08);
+  background: rgba(255, 255, 255, 0.01);
+  color: #adc0b7;
+  font-size: 1.02rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: visible;
+  z-index: 0;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.focus-chip-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(139, 225, 180, 0),
+      rgba(139, 225, 180, 0.08),
+      rgba(139, 225, 180, 0)
+    );
+  transform: translateX(-125%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.focus-chip-item::after {
+  content: '';
+  position: absolute;
+  left: 0.42rem;
+  right: 0.42rem;
+  bottom: 0.22rem;
+  height: 1px;
+  background: rgba(139, 225, 180, 0.08);
+  transform: scaleX(0.45);
+  transform-origin: left center;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.focus-chip-bracket {
+  color: #79cda4;
+  opacity: 0.85;
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+.focus-chip-label {
+  transition: transform 180ms ease, color 180ms ease, letter-spacing 180ms ease;
+  text-rendering: geometricPrecision;
+}
+
+.focus-chip-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.35rem);
+  padding: 0.52rem 0.62rem 0.58rem;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 225, 180, 0.12);
+  background: rgba(10, 14, 17, 0.98);
+  color: #b5cbc0;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  white-space: normal;
+  min-width: 16rem;
+  max-width: 22rem;
+  opacity: 0;
+  transform: translateY(-2px);
+  pointer-events: none;
+  z-index: 8;
+  transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.focus-chip-tooltip-label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #82cfa9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.38rem;
+}
+
+.focus-chip-tooltip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.focus-chip-tooltip-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 225, 180, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  color: #d5e8de;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(3px) scale(0.985);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+  transition-delay: calc(var(--tooltip-tag-order, 0) * 45ms);
+  position: relative;
+  overflow: hidden;
+}
+
+.focus-chip-tooltip-tag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 225, 180, 0),
+    rgba(139, 225, 180, 0.08),
+    rgba(139, 225, 180, 0)
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.terminal-list li:hover {
+  z-index: 2;
+}
+
+.focus-chip-item:hover {
+  z-index: 4;
+}
+
+.focus-chip-item:hover .focus-chip-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag::after {
+  opacity: 1;
+  animation: focus-chip-sweep 650ms ease;
+  animation-delay: calc(var(--tooltip-tag-order, 0) * 55ms);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag:hover {
+  border-color: rgba(139, 225, 180, 0.24);
+  background: rgba(139, 225, 180, 0.05);
+  color: #ecfaf3;
+}
+
+.focus-chip-item.tone-mint {
+  border-color: rgba(139, 225, 180, 0.12);
+}
+
+.focus-chip-item.tone-neon {
+  border-color: rgba(64, 233, 255, 0.2);
+  background: rgba(64, 233, 255, 0.03);
+  color: #c3f8ff;
+}
+
+.focus-chip-item.tone-neon .focus-chip-bracket {
+  color: #40e9ff;
+}
+
+.focus-chip-item.tone-neon::after {
+  background: rgba(64, 233, 255, 0.2);
+}
+
+.focus-chip-item.tone-blue {
+  border-color: rgba(138, 180, 255, 0.14);
+  color: #b6c8dd;
+}
+
+.focus-chip-item.tone-blue .focus-chip-bracket {
+  color: #8ab4ff;
+}
+
+.focus-chip-item.tone-blue::after {
+  background: rgba(138, 180, 255, 0.12);
+}
+
+.focus-chip-item.tone-violet {
+  border-color: rgba(192, 160, 255, 0.14);
+  color: #cbbce6;
+}
+
+.focus-chip-item.tone-violet .focus-chip-bracket {
+  color: #b99bff;
+}
+
+.focus-chip-item.tone-violet::after {
+  background: rgba(185, 155, 255, 0.12);
+}
+
+.focus-chip-item.tone-amber {
+  border-color: rgba(255, 201, 120, 0.14);
+  color: #d8c8a8;
+}
+
+.focus-chip-item.tone-amber .focus-chip-bracket {
+  color: #f0c16d;
+}
+
+.focus-chip-item.tone-amber::after {
+  background: rgba(240, 193, 109, 0.12);
+}
+
+.focus-chip-item:hover {
+  border-color: rgba(139, 225, 180, 0.22);
+  background: rgba(139, 225, 180, 0.05);
+  color: #d8ebe2;
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 225, 180, 0.05),
+    0 0 12px rgba(139, 225, 180, 0.08);
+  transform: translateY(-1px);
+}
+
+.focus-chip-item.tone-blue:hover {
+  border-color: rgba(138, 180, 255, 0.28);
+  background: rgba(138, 180, 255, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(138, 180, 255, 0.05),
+    0 0 12px rgba(138, 180, 255, 0.08);
+}
+
+.focus-chip-item.tone-blue:hover .focus-chip-bracket,
+.focus-chip-item.tone-blue:hover .focus-chip-label {
+  color: #d7e5ff;
+}
+
+.focus-chip-item.tone-blue:hover .focus-chip-tooltip {
+  border-color: rgba(138, 180, 255, 0.18);
+  color: #d8e6ff;
+}
+
+.focus-chip-item.tone-neon:hover {
+  border-color: rgba(64, 233, 255, 0.34);
+  background: rgba(64, 233, 255, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(64, 233, 255, 0.06),
+    0 0 14px rgba(64, 233, 255, 0.12);
+}
+
+.focus-chip-item.tone-neon:hover .focus-chip-bracket,
+.focus-chip-item.tone-neon:hover .focus-chip-label {
+  color: #e6fdff;
+}
+
+.focus-chip-item.tone-neon:hover .focus-chip-tooltip {
+  border-color: rgba(64, 233, 255, 0.24);
+  color: #dcfbff;
+}
+
+.focus-chip-item.tone-neon:hover .focus-chip-tooltip-label {
+  color: #66ecff;
+}
+
+.focus-chip-item.tone-neon:hover .focus-chip-tooltip-tag {
+  border-color: rgba(64, 233, 255, 0.16);
+}
+
+.focus-chip-item.tone-neon:hover .focus-chip-tooltip-tag::after {
+  background: linear-gradient(
+    90deg,
+    rgba(64, 233, 255, 0),
+    rgba(64, 233, 255, 0.12),
+    rgba(64, 233, 255, 0)
+  );
+}
+
+.focus-chip-item.tone-amber:hover {
+  border-color: rgba(240, 193, 109, 0.28);
+  background: rgba(240, 193, 109, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(240, 193, 109, 0.05),
+    0 0 12px rgba(240, 193, 109, 0.08);
+}
+
+.focus-chip-item.tone-amber:hover .focus-chip-bracket,
+.focus-chip-item.tone-amber:hover .focus-chip-label {
+  color: #f6dfb4;
+}
+
+.focus-chip-item.tone-amber:hover .focus-chip-tooltip {
+  border-color: rgba(240, 193, 109, 0.18);
+  color: #f0dfbf;
+}
+
+.focus-chip-item.tone-violet:hover {
+  border-color: rgba(185, 155, 255, 0.28);
+  background: rgba(185, 155, 255, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(185, 155, 255, 0.05),
+    0 0 12px rgba(185, 155, 255, 0.08);
+}
+
+.focus-chip-item.tone-violet:hover .focus-chip-bracket,
+.focus-chip-item.tone-violet:hover .focus-chip-label {
+  color: #e3d6ff;
+}
+
+.focus-chip-item.tone-violet:hover .focus-chip-tooltip {
+  border-color: rgba(185, 155, 255, 0.18);
+  color: #e7dcff;
+}
+
+.focus-chip-item.tone-mint:hover .focus-chip-tooltip {
+  border-color: rgba(139, 225, 180, 0.18);
+  color: #d7efe3;
+}
+
+.focus-chip-item:hover::before {
+  opacity: 1;
+  animation: focus-chip-sweep 700ms ease;
+  animation-delay: var(--chip-delay, 0ms);
+}
+
+.focus-chip-item:hover::after {
+  background: rgba(139, 225, 180, 0.24);
+  transform: scaleX(1);
+}
+
+.focus-chip-item:hover .focus-chip-bracket {
+  color: #abf1cd;
+  opacity: 1;
+}
+
+.focus-chip-item:hover .focus-chip-bracket:first-child {
+  transform: translateX(-1px);
+}
+
+.focus-chip-item:hover .focus-chip-bracket:last-child {
+  transform: translateX(1px);
+}
+
+.focus-chip-item:hover .focus-chip-label {
+  color: #ecfaf3;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 900px) {
+  .focus-chip-item {
+    font-size: 0.92rem;
+    padding: 0.34rem 0.58rem;
+  }
+
+  .focus-chip-tooltip {
+    min-width: 13rem;
+    max-width: 18rem;
+    font-size: 0.82rem;
+  }
+
+  .focus-chip-tooltip-tag {
+    font-size: 0.8rem;
+    padding: 0.28rem 0.42rem;
+  }
+}
+
+/* Focus chip tone consistency (fix tooltip/tag colors across all hover states) */
+.focus-chip-item.tone-mint {
+  --chip-accent-rgb: 139, 225, 180;
+  --chip-accent: #8be1b4;
+  --chip-hover-fg: #ecfaf3;
+  --chip-tooltip-fg: #d7efe3;
+}
+
+.focus-chip-item.tone-neon {
+  --chip-accent-rgb: 64, 233, 255;
+  --chip-accent: #40e9ff;
+  --chip-hover-fg: #e6fdff;
+  --chip-tooltip-fg: #dcfbff;
+}
+
+.focus-chip-item.tone-blue {
+  --chip-accent-rgb: 138, 180, 255;
+  --chip-accent: #8ab4ff;
+  --chip-hover-fg: #d7e5ff;
+  --chip-tooltip-fg: #d8e6ff;
+}
+
+.focus-chip-item.tone-amber {
+  --chip-accent-rgb: 240, 193, 109;
+  --chip-accent: #f0c16d;
+  --chip-hover-fg: #f6dfb4;
+  --chip-tooltip-fg: #f0dfbf;
+}
+
+.focus-chip-item.tone-violet {
+  --chip-accent-rgb: 185, 155, 255;
+  --chip-accent: #b99bff;
+  --chip-hover-fg: #e3d6ff;
+  --chip-tooltip-fg: #e7dcff;
+}
+
+.focus-chip-tooltip-label {
+  color: var(--chip-accent);
+}
+
+.focus-chip-tooltip-tag {
+  border-color: rgba(var(--chip-accent-rgb), 0.12);
+}
+
+.focus-chip-tooltip-tag::after {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--chip-accent-rgb), 0),
+    rgba(var(--chip-accent-rgb), 0.08),
+    rgba(var(--chip-accent-rgb), 0)
+  );
+}
+
+.focus-chip-item:hover .focus-chip-bracket,
+.focus-chip-item:hover .focus-chip-label {
+  color: var(--chip-hover-fg);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip {
+  border-color: rgba(var(--chip-accent-rgb), 0.24);
+  color: var(--chip-tooltip-fg);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-label {
+  color: var(--chip-accent);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag {
+  border-color: rgba(var(--chip-accent-rgb), 0.16);
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag::after {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--chip-accent-rgb), 0),
+    rgba(var(--chip-accent-rgb), 0.12),
+    rgba(var(--chip-accent-rgb), 0)
+  );
+}
+
+.focus-chip-item:hover .focus-chip-tooltip-tag:hover {
+  border-color: rgba(var(--chip-accent-rgb), 0.28);
+  background: rgba(var(--chip-accent-rgb), 0.07);
+  color: var(--chip-hover-fg);
+}
+
+.terminal-list li:hover {
+  border-color: rgba(92, 188, 139, 0.24);
+  background: rgba(139, 225, 180, 0.03);
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 225, 180, 0.04),
+    0 0 0 1px rgba(139, 225, 180, 0.03);
+  transform: translateX(2px);
+}
+
+.terminal-list li:hover::before {
+  background: rgba(139, 225, 180, 0.4);
+  box-shadow: 0 0 8px rgba(139, 225, 180, 0.2);
+}
+
+.terminal-list li:hover::after {
+  opacity: 1;
+  animation: terminal-row-sweep 700ms ease;
+}
+
+.terminal-list li:hover .terminal-key {
+  color: #b5f6d5;
+  letter-spacing: 0.01em;
+  transform: translateX(1px);
+}
+
+.terminal-list li:hover span:last-child {
+  color: #d6e6de;
+  transform: translateX(1px);
 }
 
 .pane-divider {
@@ -2410,6 +3120,57 @@ body {
   background: rgba(139, 225, 180, 0.28);
 }
 
+.about-simple-pane,
+.about-simple-pane .pane-titlebar,
+.about-simple-pane .pane-subsection-head,
+.about-simple-pane .pane-divider {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.about-simple-pane:hover {
+  border-color: rgba(139, 225, 180, 0.24);
+  background-color: rgba(14, 19, 22, 0.99);
+  transform: translateY(-1px);
+}
+
+.about-simple-pane:hover .pane-titlebar {
+  border-bottom-color: rgba(139, 225, 180, 0.18);
+  background: rgba(139, 225, 180, 0.015);
+}
+
+.about-simple-pane:hover .pane-title,
+.about-simple-pane:hover .terminal-key {
+  color: #9de6c1;
+}
+
+.about-simple-pane:hover .pane-status,
+.about-simple-pane:hover .pane-subsection-head .pane-status {
+  color: #9eb4a9;
+}
+
+.about-simple-pane:hover .pane-divider {
+  background: rgba(139, 225, 180, 0.18);
+}
+
+.about-simple-pane:hover .pane-titlebar::after {
+  width: 3.2rem;
+  background: rgba(139, 225, 180, 0.28);
+}
+
+.about-simple-pane:hover .pane-subsection-head {
+  color: #89cfaa;
+}
+
+.about-simple-pane:hover .journey-row {
+  border-bottom-color: rgba(139, 225, 180, 0.12);
+}
+
 .media-card:hover,
 .archive-card:hover {
   border-color: rgba(139, 225, 180, 0.2);
@@ -2484,6 +3245,24 @@ body {
   49%,
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes terminal-row-sweep {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 108%;
+  }
+}
+
+@keyframes focus-chip-sweep {
+  from {
+    transform: translateX(-125%);
+  }
+  to {
+    transform: translateX(125%);
   }
 }
 
