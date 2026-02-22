@@ -6,6 +6,7 @@ function ShellLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const brandTokenPath = getBrandTokenPath(location.pathname);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -99,9 +100,20 @@ function ShellLayout() {
       <BackgroundGlow />
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="wrap nav-row">
+          <div className="tmux-pathline" aria-hidden="true">
+            tmux: session github_io
+          </div>
           <NavLink className="brand" to="/">
-            <span className="brand-mark">MG</span>
-            <span className="brand-text">Martin Gou</span>
+            <span className="brand-mark brand-token" aria-hidden="true">
+              <span className="brand-token-default">{brandTokenPath}</span>
+              <span className="brand-token-hover">{`${brandTokenPath}>`}</span>
+            </span>
+            <span className="brand-copy">
+              <span className="brand-text">Guotao (Martin) Gou</span>
+              {/* <span className="brand-subtitle" aria-hidden="true">
+                robotics / systems / build
+              </span> */}
+            </span>
           </NavLink>
 
           <button
@@ -153,6 +165,22 @@ function ShellLayout() {
       </footer>
     </div>
   );
+}
+
+function getBrandTokenPath(pathname) {
+  if (pathname === '/' || pathname === '/home') {
+    return '~/';
+  }
+
+  if (pathname.startsWith('/blog')) {
+    return '~/blog';
+  }
+
+  if (pathname.startsWith('/projects')) {
+    return '~/project';
+  }
+
+  return '~/';
 }
 
 function BackgroundGlow() {
