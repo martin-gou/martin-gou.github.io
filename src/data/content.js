@@ -2,7 +2,7 @@ import profileImage from '../../images/profile_picture_linkedin.jpeg';
 import heroTexture from '../../images/hero-bg.jpg';
 
 export const personal = {
-  role: 'Coder • Curious Learner',
+  role: 'Coder • Curious Learner (Currently Learning OpenCode)',
   shortBio:
     'I love new technologies. I also recharge with nature, animals, guitar, and ukulele.',
   locationLine: 'Shenzhen → Toronto → Delft',

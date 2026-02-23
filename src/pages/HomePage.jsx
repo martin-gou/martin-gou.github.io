@@ -47,7 +47,7 @@ function HomePage() {
               <span className="pane-title">home</span>
               <span className="pane-status">[main]</span>
             </div>
-            <p className="eyebrow">Robotics • Software</p>
+            <p className="eyebrow">Multi LLM Agent • DevOps • Software</p>
             <h1>
               Building
               <br />
@@ -56,7 +56,7 @@ function HomePage() {
                 <span className="terminal-cursor" aria-hidden="true" />
               </span>
             </h1>
-            <p className="hero-lead">Robotics student. Builder. Learning in public.</p>
+            <p className="hero-lead"></p>
             <div className="hero-actions">
               <button className="btn btn-primary" type="button" onClick={() => scrollTo('projects-preview')}>
                 Projects
