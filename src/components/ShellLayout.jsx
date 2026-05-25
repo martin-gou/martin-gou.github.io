@@ -28,7 +28,7 @@ function ShellLayout() {
         <div className="wrap nav-row">
           <NavLink className="brand" to="/">
             <span className="brand-mark" aria-hidden="true">
-              {personal.initials}
+              <img src="/tao-caligraphy.png" alt="" />
             </span>
             <span className="brand-text">{personal.name}</span>
           </NavLink>

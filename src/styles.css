@@ -117,6 +117,16 @@ textarea {
   font-style: italic;
   font-weight: 600;
   letter-spacing: 0;
+  overflow: hidden;
+}
+
+.brand-mark img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.88;
+  filter: invert(94%) sepia(10%) saturate(220%) hue-rotate(116deg) brightness(102%) contrast(92%);
 }
 
 .brand-text {
