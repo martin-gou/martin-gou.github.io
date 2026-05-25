@@ -1,59 +1,28 @@
 ---
-title: "The Meaning of LIFE (Some of my Thoughts)"
-date: 2025-07-16
+title: "人生的意义是什么"
+date: 2026-05-25
 category: Life
 excerpt: "A personal reflection on meaning, enthusiasm, and how lived experience changes the way we think about life."
 featured: true
 ---
 
-# In progress, but important to me
+不同的阶段，对于人生的感悟是不同的。
 
-This note starts from an observation I kept noticing around me: many people seem stuck in routines that do not feel alive to them.
+# 刚进大学
+刚进大学，我就会思考这个问题。或许就是觉得无聊吧。或许是对于这种哲学性的东西有一种执迷（就像是青少年一直执着于世界的意义是什么一样）。那个时候，我得出的结论，就是尽量每天让自己活得开心。因为开心，所以才舒服，如果人生每天都能够开心，那么岂不是非常舒服？
 
-People scroll, play games, repeat the same day, and sometimes lose touch with what they actually care about. That pushed me to ask myself:
+# 人生是一种体验
+后来呢，觉得人生的意义是一种体验。一直快乐的人生是不是也是挺无聊的。我像是一个小孩子，总是想要体验很多东西。我主动去找了人生的第一次实习。我主动去探索网络上找人说英文玩乐。（但是其实我是一个有点自闭autism的人，所以很多现实生活中的事情不敢尝试）。还有经历过刻骨铭心的关系，经历过一个人在外交换，经历过只有一个人的嫉妒孤单。每个东西，都让我增加了对于世界的认知，说实话有些经历当时是非常的不快乐。但是经过时间的冲洗之后，回想起来都会有很奇妙的滋味。
 
-- What is the meaning of life for me?
-- What kind of life do I want?
-- What does a "good" life actually feel like in practice?
+# 后来
+to be continued...
 
-## Stage 1: "Be happy" is not enough
-
-A simple answer is "be happy", but I do not think that is a complete answer.
-
-Happiness sounds right, but it is too vague. I do not expect life to feel good all the time. Real life includes stress, uncertainty, and hard work.
-
-So for me, a better question became:
-
-> What kind of activities make me feel deeply engaged and alive?
-
-## Stage 2: Do things you feel enthusiastic about
-
-A stronger direction is to do things that create genuine enthusiasm.
-
-When I work on something I truly care about, I feel energy instead of resistance. It is not just "fun". It is a mix of curiosity, momentum, and meaning.
-
-From a biological perspective, this also connects to motivation and reward systems (for example dopamine and other neurotransmitters). I want to understand these systems better, not only philosophically but also scientifically.
-
-## A useful resource I found
-
-I found this talk helpful when thinking about dopamine and motivation:
-
-- [How to Control Your Dopamine (Andrew Huberman)](https://www.youtube.com/watch?v=QmOF0crdyRU)
-
-## Personal background and why this question matters to me
-
-I grew up in Guizhou, China. My experience of education was shaped by high pressure and intense competition.
-
-In that system, grades can become the center of life very early. That creates discipline, but it can also create anxiety and a narrow definition of success.
-
-Because of that, questions like meaning, enthusiasm, and personal direction are not abstract for me. They are practical questions. They shape how I want to learn, build, and live.
-
-## Current conclusion
-
-This post is still evolving, but my current direction is:
-
-- Build a life around things I care about deeply
-- Keep learning how motivation actually works
-- Choose long-term meaning over short-term distraction
-
-I am leaving this as an open note, because I expect my answer to change as I grow.
+一些我觉得经历过很有意思，能说出来的事情：
+- 一个人在多伦多大学交换。没有任何一个事先认识的人。从来没去过北美，极大的满足了我的好奇心，刚到的时候有一种难以言喻的感觉。电视剧里面的场景就在眼前视网膜的清晰程度。来到UofT（在我心中是充满光环的学校），发现大家其实也都是普通人，为着自己的目标努力或又没有努力着。
+- 在荷兰经历过被teenenger不礼貌。我骂回去了，然后他们追着我到public area就跑走了。其实发现，真正内心强大的人，是不会让别人轻易扰动自己的内心的。
+- 交换的时候经历过极致的孤独。人与人的连接交互式必需品。没有的话，会有极致的难受，不能够控制自己的难受，趴在地上。
+- 到其他国家不同的城市过。体验过当地人的生活。🇨🇳，🇳🇱，🇻🇳，🇨🇦。发现人其实没有高低贵贱，只要让自己内心自满就可以了。
+- 经历过死亡威胁。当时真的是以为自己要死了。还是要珍惜人生，锻炼身体。
+- 经历过傻子和聪明人的时刻。有一段时间，我的脑子会特别慢傻。有时候我的脑子转的很快，会很开心。dopamine是一个因素。
+- 体验过海边，大山里。
+- to be continued...
