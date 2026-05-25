@@ -1,7 +1,7 @@
 ---
-title: "Project Placeholder Two"
+title: "诈骗消息检测平台（DevOps)"
 date: 2025-12-01
-category: Experiment
+category: DevOps
 status: completed
 excerpt: "Another project slot for future work."
 featured: true
@@ -11,8 +11,7 @@ coverAlt: "Project placeholder two preview"
 ---
 
 ## Overview
-
-Keep project pages direct and readable. Add screenshots later when the work is ready.
+(TU Delft DevOps course project)
 
 ## Notes
 

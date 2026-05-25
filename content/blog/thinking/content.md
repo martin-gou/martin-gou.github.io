@@ -1,6 +1,6 @@
 ---
 title: "如何思考学习"
-date: 2025-07-17
+date: 2026-05-25
 category: Learning
 tags: learn
 excerpt: "Practical habits and mental models that help me learn better, think more clearly, and make progress faster."

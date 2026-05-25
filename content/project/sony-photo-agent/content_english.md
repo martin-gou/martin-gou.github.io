@@ -1,5 +1,5 @@
 ---
-title: "Project Placeholder One"
+title: "Sony 智能拍照Agent机器人"
 date: 2026-01-01
 category: Software
 status: completed
@@ -9,6 +9,8 @@ tags: React, Tooling
 githubUrl: "https://github.com/martin-gou"
 coverAlt: "Project placeholder one preview"
 ---
+
+ai-translated
 
 ## Overview
 

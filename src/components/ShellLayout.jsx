@@ -46,11 +46,11 @@ function ShellLayout() {
           </button>
 
           <nav className={`nav-links ${menuOpen ? 'is-open' : ''}`} aria-label="Primary">
-            <NavLink to="/blog" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
-              Blog
-            </NavLink>
             <NavLink to="/projects" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
               Projects
+            </NavLink>
+            <NavLink to="/blog" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
+              Blog
             </NavLink>
             <NavLink to="/about" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
               About

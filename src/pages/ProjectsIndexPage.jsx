@@ -17,7 +17,6 @@ function ProjectsIndexPage() {
         <div className="wrap narrow">
           <p className="eyebrow">Projects</p>
           <h1>Things I have built</h1>
-          <p>A simple project archive. Replace these placeholders with real work over time.</p>
         </div>
       </section>
 

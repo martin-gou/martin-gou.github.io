@@ -1,6 +1,6 @@
 ---
 title: "What Is the Meaning of Life?"
-date: 2026-05-25
+date: 2026-01-01
 category: Life
 tags: life
 excerpt: "A personal reflection on meaning, enthusiasm, and how lived experience changes the way we think about life."

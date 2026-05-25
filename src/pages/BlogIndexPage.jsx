@@ -15,7 +15,6 @@ function BlogIndexPage() {
         <div className="wrap narrow">
           <p className="eyebrow">Blog</p>
           <h1>Notes and writing</h1>
-          <p>Short posts, learning notes, and rough ideas.</p>
         </div>
       </section>
 
