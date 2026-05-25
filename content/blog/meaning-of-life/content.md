@@ -2,6 +2,7 @@
 title: "人生的意义是什么"
 date: 2026-05-25
 category: Life
+tags: life
 excerpt: "A personal reflection on meaning, enthusiasm, and how lived experience changes the way we think about life."
 featured: true
 ---

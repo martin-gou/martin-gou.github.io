@@ -1,120 +1,109 @@
-import lifePostImage from '../../images/blog/meaning_of_life_horizontal.png';
-import thinkingPostImage from '../../images/blog2.jpg';
-import webPostImage from '../../images/blog1.jpg';
-import spicyPostImage from '../../images/blog2.jpg';
-import jsPostImage from '../../images/blog3.jpg';
-import careerPostImage from '../../images/blog4.jpg';
+import {
+  estimateReadingTime,
+  formatDateLabel,
+  normalizeArray,
+  parseFrontmatter
+} from './contentLoader.js';
 
-const rawModules = import.meta.glob('../../content/blog/posts/*.md', {
+const rawModules = import.meta.glob('../../content/blog/*/content*.md', {
   eager: true,
   query: '?raw',
   import: 'default'
 });
 
-const coverImageMap = {
-  'meaning-of-life': lifePostImage,
-  thinking: thinkingPostImage,
-  'web-development-demo': webPostImage,
-  'chinese-cooking': spicyPostImage,
-  'javascript-tips': jsPostImage,
-  'tech-career': careerPostImage
-};
+const imageModules = import.meta.glob('../../content/blog/*/images/*', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
 
-const blogTagsBySlug = {
-  'meaning-of-life': ['life'],
-  thinking: ['learn'],
-  'chinese-cooking': ['life'],
-  'web-development-demo': ['Tech'],
-  'javascript-tips': ['Tech'],
-  'tech-career': ['Tech']
-};
+const DEFAULT_COVER_IMAGE = '/background-placeholder.svg';
 
-const blogTagOptions = [
-  { value: 'all', label: 'All' },
-  { value: 'life', label: 'life' },
-  { value: 'learn', label: 'learn' },
-  { value: 'Tech', label: 'Tech' }
-];
+function getContentPathParts(filePath) {
+  const match = filePath.match(/content\/blog\/([^/]+)\/(content(?:_english)?)\.md$/);
+  return {
+    slug: match?.[1] || '',
+    language: match?.[2] === 'content_english' ? 'en' : 'zh'
+  };
+}
 
-function parseFrontmatter(raw) {
-  if (!raw.startsWith('---')) {
-    return { frontmatter: {}, body: raw.trim() };
-  }
+function buildImageMap(modules) {
+  const map = new Map();
 
-  const closing = raw.indexOf('\n---', 3);
-  if (closing === -1) {
-    return { frontmatter: {}, body: raw.trim() };
-  }
-
-  const frontmatterBlock = raw.slice(3, closing).trim();
-  const body = raw.slice(closing + 4).trim();
-  const frontmatter = {};
-
-  for (const line of frontmatterBlock.split('\n')) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) {
+  for (const [filePath, url] of Object.entries(modules)) {
+    const match = filePath.match(/content\/blog\/([^/]+)\/images\/([^/]+)$/);
+    if (!match) {
       continue;
     }
-    const separatorIndex = trimmed.indexOf(':');
-    if (separatorIndex === -1) {
-      continue;
-    }
-    const key = trimmed.slice(0, separatorIndex).trim();
-    const value = trimmed.slice(separatorIndex + 1).trim();
-    frontmatter[key] = normalizeValue(value);
+
+    const [, slug, filename] = match;
+    const images = map.get(slug) || [];
+    images.push({ filename, src: url });
+    map.set(slug, images);
   }
 
-  return { frontmatter, body };
-}
+  for (const images of map.values()) {
+    images.sort((a, b) => {
+      const aIsCover = /^cover\./i.test(a.filename);
+      const bIsCover = /^cover\./i.test(b.filename);
+      if (aIsCover !== bIsCover) {
+        return aIsCover ? -1 : 1;
+      }
 
-function normalizeValue(input) {
-  const unquoted = input.replace(/^['"]|['"]$/g, '');
-
-  if (unquoted === 'true') return true;
-  if (unquoted === 'false') return false;
-
-  if (unquoted.includes(',') && !/^\d{4}-\d{2}-\d{2}$/.test(unquoted)) {
-    return unquoted.split(',').map((item) => item.trim()).filter(Boolean);
+      return a.filename.localeCompare(b.filename);
+    });
   }
 
-  return unquoted;
+  return map;
 }
 
-function estimateReadingTime(text) {
-  const words = text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.round(words / 220));
-}
-
-function formatDate(dateValue) {
-  const date = new Date(dateValue);
-  if (Number.isNaN(date.getTime())) {
-    return dateValue;
+const imageMap = buildImageMap(imageModules);
+const contentMap = Object.entries(rawModules).reduce((map, [filePath, raw]) => {
+  const { slug, language } = getContentPathParts(filePath);
+  if (!slug) {
+    return map;
   }
-  return new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  }).format(date);
-}
 
-const posts = Object.entries(rawModules)
-  .map(([filePath, raw]) => {
-    const { frontmatter, body } = parseFrontmatter(raw);
-    const slug = filePath.split('/').pop().replace(/\.md$/, '');
+  const entry = map.get(slug) || {};
+  entry[language] = parseFrontmatter(raw);
+  map.set(slug, entry);
+  return map;
+}, new Map());
+
+const posts = Array.from(contentMap.entries())
+  .map(([slug, translations]) => {
+    const primary = translations.zh || translations.en;
+    const english = translations.en || null;
+    const { frontmatter, body } = primary;
     const date = String(frontmatter.date || '');
     const readingTime = estimateReadingTime(body);
+    const tags = normalizeArray(frontmatter.tags);
+    const images = imageMap.get(slug) || [];
 
     return {
       slug,
       title: String(frontmatter.title || slug),
       excerpt: String(frontmatter.excerpt || ''),
       category: String(frontmatter.category || 'General'),
-      tags: blogTagsBySlug[slug] || ['Tech'],
+      tags: tags.length > 0 ? tags : [String(frontmatter.category || 'general').toLowerCase()],
       date,
-      dateLabel: formatDate(date),
+      dateLabel: formatDateLabel(date),
       featured: Boolean(frontmatter.featured),
-      coverImage: coverImageMap[slug] || webPostImage,
+      coverImage: images[0]?.src || DEFAULT_COVER_IMAGE,
+      coverAlt: String(frontmatter.coverAlt || frontmatter.title || slug),
       body,
+      translations: {
+        zh: {
+          title: String(frontmatter.title || slug),
+          body
+        },
+        en: english
+          ? {
+              title: String(english.frontmatter.title || frontmatter.title || slug),
+              body: english.body
+            }
+          : null
+      },
       readingTimeLabel: `${readingTime} min read`
     };
   })
@@ -125,7 +114,8 @@ export function getAllPosts() {
 }
 
 export function getFeaturedPosts() {
-  return posts.filter((post) => post.featured);
+  const featured = posts.filter((post) => post.featured);
+  return featured.length > 0 ? featured : posts.slice(0, 2);
 }
 
 export function getPostBySlug(slug) {
@@ -133,5 +123,6 @@ export function getPostBySlug(slug) {
 }
 
 export function getBlogTagOptions() {
-  return blogTagOptions;
+  const tags = [...new Set(posts.flatMap((post) => post.tags))].sort((a, b) => a.localeCompare(b));
+  return [{ value: 'all', label: 'All' }, ...tags.map((tag) => ({ value: tag, label: tag }))];
 }

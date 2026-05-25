@@ -7,14 +7,19 @@ This repository contains the source code for my personal website, hosted on GitH
 - React + Vite frontend
 - GitHub Pages deployment via GitHub Actions
 - Blog and project pages with React Router
-- Markdown-based blog posts (`content/blog/posts/*.md`)
-- Responsive, terminal/tmux-inspired UI
+- Folder-based blog and project content
+- Responsive, quiet personal-site UI
 
 ## Structure
 
 - `src/` - React app source (pages, components, styles, data)
-- `content/blog/posts/` - Markdown blog posts
-- `images/` - Image assets used by the React app
+- `content/blog/<slug>/content.md` - Markdown blog posts
+- `content/blog/<slug>/content_english.md` - Optional English blog version
+- `content/blog/<slug>/images/` - Images for a specific blog post
+- `content/project/<slug>/content.md` - Markdown project pages
+- `content/project/<slug>/content_english.md` - Optional English project version
+- `content/project/<slug>/images/` - Images for a specific project
+- `public/` - Static assets such as the favicon and background placeholder
 - `index.html` - Vite app entry
 - `vite.config.js` - Vite configuration
 - `.github/workflows/deploy-pages.yml` - GitHub Pages CI/CD
@@ -23,16 +28,22 @@ This repository contains the source code for my personal website, hosted on GitH
 
 ### Adding Blog Posts
 
-1. Create a new Markdown file in `content/blog/posts/` (e.g. `my-new-post.md`)
+1. Create a folder such as `content/blog/my-new-post/`
 2. Use `content/blog/POST_TEMPLATE.md`
-3. Add frontmatter fields: `title`, `date`, `category`, `excerpt`, `featured`
-4. Rebuild the site (`npm run build`) or run locally (`npm run dev`)
+3. Add `content/blog/my-new-post/content.md`
+4. Add optional English content at `content/blog/my-new-post/content_english.md`
+5. Add optional images under `content/blog/my-new-post/images/`
+6. Rebuild the site (`npm run build`) or run locally (`npm run dev`)
 
 ### Adding Projects
 
-1. Add/update a project entry in `src/data/projects.js`
-2. Add image assets to `images/` if needed
-3. Rebuild the site
+1. Create a folder such as `content/project/my-project/`
+2. Use `content/project/PROJECT_TEMPLATE.md`
+3. Add `content/project/my-project/content.md`
+4. Add optional English content at `content/project/my-project/content_english.md`
+5. Add optional images under `content/project/my-project/images/`
+6. Use `content/project/my-project/images/cover.*` as the cover image
+7. Rebuild the site (`npm run build`) or run locally (`npm run dev`)
 
 ### Customizing Styles
 
@@ -40,10 +51,9 @@ This repository contains the source code for my personal website, hosted on GitH
 
 ## Image Requirements
 
-- Profile picture: Portrait / square image
-- Project thumbnails: 16:9 ratio (recommended 800x450px)
-- Blog post images: 16:9 ratio (recommended 800x450px)
-- Background images: optional
+- Project cover images: 16:9 ratio recommended
+- Blog cover images: 16:9 ratio recommended
+- Background image placeholder: `public/background-placeholder.svg`
 
 ## Development
 

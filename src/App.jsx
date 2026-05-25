@@ -1,5 +1,6 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ShellLayout from './components/ShellLayout.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 import BlogIndexPage from './pages/BlogIndexPage.jsx';
 import BlogPostPage from './pages/BlogPostPage.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route element={<ShellLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/projects" element={<ProjectsIndexPage />} />

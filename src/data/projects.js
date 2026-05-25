@@ -1,189 +1,136 @@
-import projectOneImage from '../../images/project1.jpg';
-import projectOneDetail1 from '../../images/project1-detail1.jpg';
-import projectOneDetail2 from '../../images/project1-detail2.jpg';
-import projectOneDetail3 from '../../images/project1-detail3.jpg';
-import projectOneDetail4 from '../../images/project1-detail4.jpg';
-import projectTwoImage from '../../images/project2.jpg';
-import projectThreeImage from '../../images/project3.jpg';
-import projectFourImage from '../../images/project4.jpg';
-import projectFiveImage from '../../images/project5.jpg';
-import projectSixImage from '../../images/project6.jpg';
+import { formatDateLabel, normalizeArray, parseFrontmatter } from './contentLoader.js';
 
-const CATEGORY_LABELS = {
-  all: 'All',
-  web: 'Web Development',
-  mobile: 'Mobile Apps',
-  design: 'UI / UX Design',
-  other: 'Other'
-};
+const rawModules = import.meta.glob('../../content/project/*/content*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+});
 
-function formatDateLabel(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) {
-    return value;
-  }
+const imageModules = import.meta.glob('../../content/project/*/images/*', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
 
-  return new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  }).format(date);
-}
+const DEFAULT_PROJECT_IMAGE = '/background-placeholder.svg';
 
-function enrichProject(project) {
+function getContentPathParts(filePath) {
+  const match = filePath.match(/content\/project\/([^/]+)\/(content(?:_english)?)\.md$/);
   return {
-    ...project,
-    categoryLabel: CATEGORY_LABELS[project.category] || project.category,
-    statusLabel: project.status === 'completed' ? 'Completed' : 'In Progress',
-    dateLabel: formatDateLabel(project.date),
-    subtitle: project.subtitle || CATEGORY_LABELS[project.category] || 'Project'
+    slug: match?.[1] || '',
+    language: match?.[2] === 'content_english' ? 'en' : 'zh'
   };
 }
 
-const projectList = [
-  {
-    slug: 'portfolio-website',
-    title: 'Personal Portfolio Website',
-    subtitle: 'Design + Frontend',
-    description: 'A responsive personal portfolio website built with modern web technologies.',
-    fullDescription:
-      'This personal portfolio website was designed and developed to showcase my skills, projects, and professional experience. The goal was to create a clean, modern, and responsive site that communicates my personal brand and technical ability clearly.',
-    image: projectOneImage,
-    gallery: [
-      { src: projectOneDetail1, alt: 'Portfolio homepage hero section' },
-      { src: projectOneDetail2, alt: 'Portfolio about and profile section' },
-      { src: projectOneDetail3, alt: 'Portfolio projects section' },
-      { src: projectOneDetail4, alt: 'Portfolio contact section' }
-    ],
-    category: 'web',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    githubUrl: 'https://github.com/martin-gou/project1',
-    liveUrl: '#',
-    featured: true,
-    status: 'completed',
-    date: '2024-12-15',
-    challenges:
-      'Creating a responsive design that works across devices while maintaining visual consistency and performance.',
-    solution:
-      'Used modern CSS layout patterns, modular page sections, and progressively enhanced interactions to balance aesthetics and maintainability.',
-    technologies: ['HTML5', 'CSS3', 'JavaScript ES6', 'Git', 'VS Code'],
-    features: [
-      'Responsive layout across desktop and mobile',
-      'Animated sections and interactive cards',
-      'Project and blog previews on homepage',
-      'Personal branding and portfolio storytelling'
-    ],
-    futureImprovements: [
-      'Migrate all legacy pages into a single React app',
-      'Add content analytics and search',
-      'Introduce richer project case studies'
-    ]
-  },
-  {
-    slug: 'ecommerce-platform',
-    title: 'E-commerce Platform',
-    subtitle: 'Full-stack Practice',
-    description:
-      'A full-featured e-commerce platform concept with product management and payment integration flows.',
-    fullDescription:
-      'A comprehensive e-commerce concept project focused on key commerce workflows, user authentication, product browsing, and checkout experience design.',
-    image: projectTwoImage,
-    gallery: [{ src: projectTwoImage, alt: 'E-commerce concept preview' }],
-    category: 'web',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    githubUrl: 'https://github.com/martin-gou/ecommerce',
-    liveUrl: '#',
-    featured: true,
-    status: 'completed',
-    date: '2024-11-20',
-    challenges:
-      'Handling complex application state across shopping, authentication, and order flows in a scalable way.',
-    solution:
-      'Split responsibilities across frontend UI state, backend APIs, and database models with clear boundaries and reusable components.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe API', 'JWT Authentication'],
-    features: ['Product catalog browsing', 'Cart and checkout flow', 'Authentication and user accounts']
-  },
-  {
-    slug: 'fitness-tracking-app',
-    title: 'Fitness Tracking App',
-    subtitle: 'Mobile Product Thinking',
-    description:
-      'A mobile app concept for tracking workouts, nutrition, and progress with habit-friendly UX.',
-    fullDescription:
-      'A cross-platform fitness tracking concept focused on user retention, progress visualization, and easy logging behavior across daily routines.',
-    image: projectThreeImage,
-    gallery: [{ src: projectThreeImage, alt: 'Fitness app concept screen' }],
-    category: 'mobile',
-    tags: ['React Native', 'Firebase', 'Redux'],
-    githubUrl: 'https://github.com/martin-gou/fitness-app',
-    liveUrl: '#',
-    featured: true,
-    status: 'completed',
-    date: '2024-10-10',
-    challenges:
-      'Balancing real-time sync, smooth mobile UI interactions, and a simple workflow for habit tracking.',
-    solution:
-      'Used a cross-platform architecture and reusable mobile components with a backend service supporting auth and sync.',
-    technologies: ['React Native', 'Firebase', 'Redux', 'Expo', 'React Navigation'],
-    features: ['Workout logging', 'Progress tracking', 'Habit-focused UX']
-  },
-  {
-    slug: 'travel-app-ui-design',
-    title: 'Travel App UI Design',
-    subtitle: 'Interface Design',
-    description: 'A modern and intuitive UI design concept for a travel booking application.',
-    fullDescription:
-      'A UI/UX exploration focused on travel discovery, booking flows, and visual hierarchy for high-information mobile screens.',
-    image: projectFourImage,
-    gallery: [{ src: projectFourImage, alt: 'Travel app UI mockup' }],
-    category: 'design',
-    tags: ['Figma', 'UI/UX', 'Prototyping'],
-    featured: false,
-    status: 'completed',
-    date: '2024-09-15',
-    technologies: ['Figma', 'Design Systems', 'Interactive Prototypes']
-  },
-  {
-    slug: 'weather-dashboard',
-    title: 'Weather Dashboard',
-    subtitle: 'API Integration',
-    description: 'A web application that displays weather information using third-party APIs.',
-    fullDescription:
-      'A lightweight dashboard project used to practice API integration, asynchronous UI updates, and clear data presentation.',
-    image: projectFiveImage,
-    gallery: [{ src: projectFiveImage, alt: 'Weather dashboard screen' }],
-    category: 'web',
-    tags: ['JavaScript', 'API', 'CSS'],
-    featured: false,
-    status: 'completed',
-    date: '2024-08-01',
-    technologies: ['JavaScript', 'REST API', 'CSS', 'HTML'],
-    features: ['Location search', 'Current weather and forecast display']
-  },
-  {
-    slug: 'data-visualization-tool',
-    title: 'Data Visualization Tool',
-    subtitle: 'Data + Interaction',
-    description: 'A tool for visualizing datasets with interactive charts and graphs.',
-    fullDescription:
-      'A data-focused project exploring how to present complex information through interactive visuals and better user controls.',
-    image: projectSixImage,
-    gallery: [{ src: projectSixImage, alt: 'Data visualization interface concept' }],
-    category: 'other',
-    tags: ['Python', 'D3.js', 'Data Analysis'],
-    featured: false,
-    status: 'completed',
-    date: '2024-07-20',
-    technologies: ['Python', 'D3.js', 'Data Processing']
+function buildImageMap(modules) {
+  const map = new Map();
+
+  for (const [filePath, url] of Object.entries(modules)) {
+    const match = filePath.match(/content\/project\/([^/]+)\/images\/([^/]+)$/);
+    if (!match) {
+      continue;
+    }
+
+    const [, slug, filename] = match;
+    const images = map.get(slug) || [];
+    images.push({ filename, src: url, alt: filename.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ') });
+    map.set(slug, images);
   }
-].map(enrichProject);
+
+  for (const images of map.values()) {
+    images.sort((a, b) => {
+      const aIsCover = /^cover\./i.test(a.filename);
+      const bIsCover = /^cover\./i.test(b.filename);
+      if (aIsCover !== bIsCover) {
+        return aIsCover ? -1 : 1;
+      }
+
+      return a.filename.localeCompare(b.filename);
+    });
+  }
+
+  return map;
+}
+
+function toTitleCase(value) {
+  return String(value || '')
+    .split(/[\s-]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+const imageMap = buildImageMap(imageModules);
+const contentMap = Object.entries(rawModules).reduce((map, [filePath, raw]) => {
+  const { slug, language } = getContentPathParts(filePath);
+  if (!slug) {
+    return map;
+  }
+
+  const entry = map.get(slug) || {};
+  entry[language] = parseFrontmatter(raw);
+  map.set(slug, entry);
+  return map;
+}, new Map());
+
+const projectList = Array.from(contentMap.entries())
+  .map(([slug, translations]) => {
+    const primary = translations.zh || translations.en;
+    const english = translations.en || null;
+    const { frontmatter, body } = primary;
+    const date = String(frontmatter.date || '');
+    const category = String(frontmatter.category || 'Project');
+    const status = String(frontmatter.status || 'completed');
+    const images = imageMap.get(slug) || [];
+    const gallery = images.map((image, index) => ({
+      ...image,
+      alt:
+        index === 0
+          ? String(frontmatter.coverAlt || frontmatter.title || image.alt)
+          : image.alt
+    }));
+
+    return {
+      slug,
+      title: String(frontmatter.title || toTitleCase(slug)),
+      description: String(frontmatter.excerpt || frontmatter.description || ''),
+      fullDescription: String(frontmatter.excerpt || frontmatter.description || ''),
+      category,
+      categoryLabel: category,
+      tags: normalizeArray(frontmatter.tags),
+      githubUrl: frontmatter.githubUrl ? String(frontmatter.githubUrl) : '',
+      liveUrl: frontmatter.liveUrl ? String(frontmatter.liveUrl) : '',
+      featured: Boolean(frontmatter.featured),
+      status,
+      statusLabel: status === 'completed' ? 'Completed' : toTitleCase(status),
+      date,
+      dateLabel: formatDateLabel(date),
+      image: gallery[0]?.src || DEFAULT_PROJECT_IMAGE,
+      gallery,
+      body,
+      translations: {
+        zh: {
+          title: String(frontmatter.title || toTitleCase(slug)),
+          body
+        },
+        en: english
+          ? {
+              title: String(english.frontmatter.title || frontmatter.title || toTitleCase(slug)),
+              body: english.body
+            }
+          : null
+      }
+    };
+  })
+  .sort((a, b) => new Date(b.date) - new Date(a.date));
 
 export function getAllProjects() {
   return projectList;
 }
 
 export function getFeaturedProjects() {
-  return projectList.filter((project) => project.featured);
+  const featured = projectList.filter((project) => project.featured);
+  return featured.length > 0 ? featured : projectList.slice(0, 3);
 }
 
 export function getProjectBySlug(slug) {
@@ -191,9 +138,9 @@ export function getProjectBySlug(slug) {
 }
 
 export function getProjectCategories() {
-  const values = [...new Set(projectList.map((project) => project.category))];
-  return [{ value: 'all', label: CATEGORY_LABELS.all }, ...values.map((value) => ({
-    value,
-    label: CATEGORY_LABELS[value] || value
-  }))];
+  const values = [...new Set(projectList.map((project) => project.category))].sort((a, b) =>
+    a.localeCompare(b)
+  );
+
+  return [{ value: 'all', label: 'All' }, ...values.map((value) => ({ value, label: value }))];
 }
