@@ -49,11 +49,11 @@ function ShellLayout() {
             <NavLink to="/blog" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
               Blog
             </NavLink>
-            <NavLink to="/about" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
-              About
-            </NavLink>
             <NavLink to="/projects" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
               Projects
+            </NavLink>
+            <NavLink to="/about" className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
+              About
             </NavLink>
           </nav>
         </div>
